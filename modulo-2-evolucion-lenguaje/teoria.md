@@ -1,0 +1,100 @@
+# Módulo 2. Evolución del Lenguaje Java (6 horas totales)
+
+> **Hoy solo se cubre la Sección 1 (`var`), Sección 2 (Switch Expressions) y Sección 3 (Text Blocks) — aprox. 1 hora.**
+> Las secciones 4-6 y el laboratorio quedan preparados para la siguiente sesión.
+
+---
+
+## HOY — Sección 1: Inferencia de tipos con `var` (15 min)
+
+### Teoría
+- Introducido en **Java 10** (JEP 286).
+- `var` es inferencia de tipo **local**, resuelta en tiempo de **compilación** — Java sigue siendo fuertemente tipado, no es como `var`/`let` en JavaScript.
+- Solo aplica a **variables locales** (dentro de métodos, bloques, for-loops, try-with-resources). NO aplica a:
+  - Atributos de clase (fields)
+  - Parámetros de métodos (con excepción de lambdas desde Java 11)
+  - Tipos de retorno
+- Reglas: siempre necesita un inicializador (`var x;` sin valor no compila), y no puede inferir `null` sin un cast.
+
+### Cuándo usarlo (y cuándo no) — buena práctica
+- ✅ Cuando el tipo es obvio por el lado derecho: `var lista = new ArrayList<Cliente>();`
+- ✅ Cuando el tipo es muy largo/genérico: `var resultado = Map.<String, List<Pedido>>of();`
+- ❌ Cuando reduce la legibilidad: `var x = obtenerDatos();` (¿qué retorna `obtenerDatos()`? no se sabe a simple vista)
+
+### Demo en vivo
+Ver `demos/01-var/Var.java`.
+
+---
+
+## HOY — Sección 2: Switch Expressions (25 min)
+
+### Teoría
+- Estables desde **Java 14** (JEP 361), preview desde Java 12.
+- El `switch` clásico es una **sentencia** (statement); el nuevo `switch` puede ser una **expresión** (retorna un valor).
+- Sintaxis con flecha (`->`) en vez de `case ... :` — elimina el "fall-through" accidental (uno de los bugs más clásicos de Java 8).
+- Permite múltiples etiquetas por rama: `case LUNES, MARTES, MIERCOLES ->`.
+- `yield` reemplaza a `return`/`break` cuando el cuerpo de una rama necesita más de una expresión (bloque `{}`).
+- El compilador exige **exhaustividad**: si es un `enum` y falta un caso (sin `default`), no compila — detecta bugs en tiempo de compilación en vez de runtime.
+
+### Demo en vivo
+Ver `demos/02-switch-expressions/SwitchExpressions.java` — muestra lado a lado el switch clásico de Java 8 (con fall-through bug incluido a propósito) vs. la expresión moderna.
+
+---
+
+## HOY — Sección 3: Text Blocks (15 min)
+
+### Teoría
+- Estables desde **Java 15** (JEP 378), preview desde Java 13.
+- Delimitados por `"""` (triple comilla), pensados para strings multilínea: JSON, SQL, HTML, mensajes.
+- Reglas de indentación: el compilador quita automáticamente el espacio en blanco "incidental" común a todas las líneas (basado en la línea de cierre `"""`).
+- Soportan interpolación "manual" vía `.formatted(...)` (Java no tiene interpolación nativa de strings hasta versiones más recientes con String Templates, que fue preview y luego se retiró).
+- Se pueden combinar con métodos existentes de `String` (`.strip()`, `.lines()`, etc.)
+
+### Demo en vivo
+Ver `demos/03-text-blocks/TextBlocks.java` — comparación de un JSON/SQL construido con concatenación (Java 8) vs. Text Block.
+
+### Cierre de la sesión de hoy
+"Hoy vimos 3 mejoras de **sintaxis y legibilidad**. La próxima sesión seguimos con cambios más profundos en el **modelo de datos** del lenguaje: Records, Sealed Classes y Pattern Matching — que cambian cómo modelamos y validamos el código, no solo cómo se ve."
+
+---
+
+## PRÓXIMA SESIÓN — Sección 4: Records y Sealed Classes
+
+### Records (Java 16 estable, JEP 395)
+- Clases inmutables de datos con una sola línea: constructor, getters, `equals`, `hashCode` y `toString` generados automáticamente.
+- Reemplazan gran parte del boilerplate de POJOs/DTOs, y de librerías como Lombok en muchos casos.
+- Pueden tener constructores compactos para validación, métodos adicionales e implementar interfaces — pero **no pueden extender otras clases** (son implícitamente `final`) ni tener atributos de instancia mutables adicionales.
+
+### Sealed Classes (Java 17 estable, JEP 409)
+- Permiten declarar explícitamente **qué clases pueden extender/implementar** una clase o interfaz (`permits`).
+- Cierran el conjunto de subtipos posibles — el compilador lo sabe, lo que habilita exhaustividad en pattern matching (ver siguiente sección).
+- Modelan muy bien jerarquías de dominio cerradas (ej. tipos de pago, estados de una orden, resultados de una operación).
+
+Ver `demos/04-records-sealed/RecordsSealed.java`.
+
+## PRÓXIMA SESIÓN — Sección 5: Pattern Matching for `instanceof` y `switch`
+
+### Pattern Matching for instanceof (Java 16 estable, JEP 394)
+- Elimina el cast redundante después de un `instanceof`.
+- Antes: `if (obj instanceof String) { String s = (String) obj; ... }`
+- Ahora: `if (obj instanceof String s) { ... uso "s" directamente ... }`
+
+### Pattern Matching for switch (Java 21 estable, JEP 441)
+- El `switch` puede hacer *pattern matching* sobre el tipo, no solo sobre valores constantes.
+- Combinado con **Record Patterns** (JEP 440, también Java 21) permite "deconstruir" records directamente en el `case`.
+- Combinado con **Sealed Classes**, el compilador valida exhaustividad total sin necesitar `default`.
+
+Ver `demos/05-pattern-matching/PatternMatching.java`.
+
+## PRÓXIMA SESIÓN — Sección 6: Mejoras en Streams, Optional y colecciones inmutables
+
+- `Stream.toList()` (Java 16) como atajo a `collect(Collectors.toList())`.
+- Nuevos métodos en `Optional`: `ifPresentOrElse`, `or`, `stream()` (Java 9-11).
+- Métodos factoría inmutables: `List.of()`, `Set.of()`, `Map.of()` (Java 9) — colecciones verdaderamente inmutables (lanzan `UnsupportedOperationException`), a diferencia de `Collections.unmodifiableList`.
+- **Sequenced Collections** (Java 21, JEP 431): métodos nuevos como `getFirst()`, `getLast()`, `reversed()` disponibles directamente en `List`, `Deque`, `LinkedHashSet`, etc.
+
+Ver `demos/06-streams-optional/StreamsOptional.java`.
+
+## PRÓXIMA SESIÓN — Laboratorio: Refactorización de código Java 8
+
+Ver carpeta `laboratorio/` — código legado en estilo Java 8 (`LegacyOrderService.java`) que los participantes deben refactorizar aplicando todo lo visto en el módulo. Incluye `SolucionModerna.java` como solución de referencia (no repartir hasta el final del ejercicio).
