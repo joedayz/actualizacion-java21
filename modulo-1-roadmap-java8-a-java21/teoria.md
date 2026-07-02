@@ -73,7 +73,7 @@ Aquí es solo un **preview conceptual** — el detalle de código se profundiza 
 - **Pattern Matching for `instanceof`** (finales)
 - **Records** (finales desde Java 16)
 - **Text Blocks** (finales desde Java 15)
-- Nuevos Garbage Collectors: **ZGC** y **Shenandoah** ya estables
+- Nuevos Garbage Collectors: **G1** , **ZGC** y **Shenandoah** ya estables
 - Fuerte encapsulación de APIs internas del JDK (`--illegal-access` ya no disponible) — primer gran punto de fricción de migración
 
 ### Java 21 (LTS, 2023)

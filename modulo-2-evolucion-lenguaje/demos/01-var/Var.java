@@ -37,6 +37,8 @@ public class Var {
         // Lo que var NO puede hacer:
         // var sinInicializar;              // ERROR: necesita inicializador
         // var nulo = null;                 // ERROR: no puede inferir tipo de null
+
+
         System.out.println();
         System.out.println("El tipo real de 'clientes' sigue siendo: " + clientes.getClass().getSimpleName());
     }

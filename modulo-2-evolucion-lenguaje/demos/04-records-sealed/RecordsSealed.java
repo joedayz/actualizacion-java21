@@ -33,17 +33,37 @@ public class RecordsSealed {
     // ===== AHORA (Java 16+): record =====
     // Constructor, getters (x(), y()), equals, hashCode y toString: generados automáticamente.
     record Punto(int x, int y) {
+
+        // GENERADO IMPLICITAMENTE : CONSTRUCTOR CANONICO
+//        Punto (int x, int y) {
+//            if (x < 0 || y < 0) {
+//                throw new IllegalArgumentException("Coordenadas no pueden ser negativas");
+//            }
+//
+//            //obligado a asignar x e y, aunque no sea necesario en un record
+//            this.x = x;
+//            this.y = y;
+//
+//        }
+
+
         // Constructor compacto: para validar sin repetir la asignación de campos
-        Punto {
-            if (x < 0 || y < 0) {
-                throw new IllegalArgumentException("Coordenadas no pueden ser negativas");
-            }
-        }
+//        Punto {
+//            if (x < 0 || y < 0) {
+//                throw new IllegalArgumentException("Coordenadas no pueden ser negativas");
+//            }
+//        }
 
         // Los records pueden tener métodos adicionales
         double distanciaAlOrigen() {
             return Math.sqrt(x * x + y * y);
         }
+
+        //NOTA IMPORTANTE
+        // Si sobreescribe el equals(), tambien debes sobreescribir el hashCode() para mantener el contrato entre ambos
+        // Si a.equals(b) es true, entonces a.hashCode() == b.hashCode()
+        // Si no se cumple: HashMap y HashSet pueden comportarse de manera inesperada,
+        // ya que dependen del hashCode() para ubicar objetos en sus estructuras internas.
     }
 
     // ===== Sealed classes (Java 17+): jerarquía cerrada de tipos =====
@@ -54,6 +74,46 @@ public class RecordsSealed {
 
     // Nota: como FormaPago es "sealed" y solo permite estas 3 implementaciones,
     // el compilador puede validar exhaustividad en un switch (ver demo 05).
+
+
+    //ejemplo con Transporte
+
+    sealed interface Transporte
+            permits Auto, Bicicleta, Avion {
+    }
+
+    final class Auto implements Transporte {
+    }
+
+    non-sealed class Bicicleta implements Transporte {
+    }
+
+    final class Avion implements Transporte {
+    }
+
+
+    //ejemplo con Vehiculo
+
+    sealed interface Vehiculo
+            permits Terrestre, Aereo {
+    }
+
+    sealed class Terrestre
+            implements Vehiculo
+            permits AutoPower, Moto {
+    }
+
+    final class AutoPower extends Terrestre {
+    }
+
+    final class Moto extends Terrestre {
+    }
+
+    final class Aereo implements Vehiculo {
+    }
+
+
+
 
     public static void main(String[] args) {
         System.out.println("=== Comparando POJO clásico vs record ===");
