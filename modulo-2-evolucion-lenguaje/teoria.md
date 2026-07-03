@@ -126,6 +126,69 @@ mvn test -Dtest=StreamsOptionalExercisesTest
 
 ---
 
+## SESIÓN 2 — Sección 7: Cambios en comentarios / JavaDoc (extra pedido en clase)
+
+No es un cambio del *compilador* de Java 21, pero sí de cómo documentamos APIs en el ecosistema moderno. Conviene conocerlo porque aparece en código y en IDEs recientes.
+
+### Antes (Java 8): `/** ... */` + HTML
+```java
+/**
+ * Saluda a una persona.
+ * <p>Ejemplo:
+ * <pre>{@code
+ * saludar("Ana");
+ * }</pre>
+ * @param nombre no debe ser {@code null}
+ * @return saludo
+ */
+```
+Funciona, pero mezclar HTML dentro del fuente es ruidoso y frágil.
+
+### Java 18 (JEP 413): `{@snippet}`
+Ejemplos de código embebidos en JavaDoc sin el lío de `<pre>{@code ...}</pre>`:
+
+```java
+/**
+ * Calcula un porcentaje.
+ * {@snippet :
+ * int p = porcentaje(1, 4); // 25
+ * }
+ */
+```
+
+La herramienta `javadoc` resalta y valida mejor esos ejemplos.
+
+### Java 23 (JEP 467): documentación Markdown con `///`
+En lugar de `/** ... */` con HTML, puedes escribir **líneas consecutivas** que empiezan con `///`:
+
+```java
+/// Saluda a una persona usando **Markdown**.
+///
+/// Ejemplo: `saludar("Ana")`
+///
+/// @param nombre no debe ser `null`
+/// @return saludo
+public static String saludar(String nombre) { ... }
+```
+
+Puntos clave para la clase:
+- `///` **siempre compiló** (es un comentario de fin de línea con una `/` extra).
+- Lo nuevo es que **`javadoc` (JDK 23+)** trata esas líneas como comentario de documentación y renderiza Markdown (CommonMark).
+- Los tags `@param`, `@return`, `{@link}`, etc. **siguen válidos** dentro de `///`.
+- No dejes una línea en blanco *sin* `///` en medio del bloque: corta el comentario de documentación.
+
+### Trampa con text blocks
+Dentro de un text block (`""" ... """`), las secuencias `//` o `/*` son **texto del string**, no comentarios de Java.
+
+### Demo y práctica
+Ver `demos/07-comentarios-javadoc/ComentariosModernos.java`.
+
+```bash
+mvn test -Dtest=ComentariosModernosTest
+```
+
+---
+
 ## SESIÓN 2 — Laboratorio: Refactorización de código Java 8
 
 Proyecto Maven con tests (recomendado en clase):

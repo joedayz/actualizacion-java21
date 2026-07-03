@@ -2,37 +2,50 @@
 
 Basado en la propuesta comercial `Propuesta Comercial - Java 21.pdf` (JOEDAYZ academy, 40 horas, 9 módulos).
 
-## Empieza aquí (Sesión 2 — hoy)
+## Sesión en curso
 
-- [`agenda-sesion-2-modulo-2.md`](./agenda-sesion-2-modulo-2.md) — Agenda de **4 horas** para terminar el Módulo 2 (ejercicios Maven + JUnit 5).
-- **Ejercicios (participantes):** [`modulo-2-evolucion-lenguaje/ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/) — `mvn test`.
-- **Soluciones (solo facilitador):** carpeta local `soluciones-modulo-2/` (gitignored, no va al repo).
+- **Módulo 2 (sesión 2):** [`agenda-sesion-2-modulo-2.md`](./agenda-sesion-2-modulo-2.md) · ejercicios en [`modulo-2-evolucion-lenguaje/ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/)
+- **Módulo 3 (preparado):** [`modulo-3-concurrencia-moderna/teoria.md`](./modulo-3-concurrencia-moderna/teoria.md) · ejercicios en [`modulo-3-concurrencia-moderna/ejercicios/`](./modulo-3-concurrencia-moderna/ejercicios/)
 
-## Módulo 1. Roadmap de Java 8 a Java 21 (3h) — sesión anterior
+Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluciones-modulo-3/`.
+
+## Módulo 1. Roadmap de Java 8 a Java 21 (3h)
 - [`modulo-1-roadmap-java8-a-java21/teoria.md`](./modulo-1-roadmap-java8-a-java21/teoria.md)
 - [`modulo-1-roadmap-java8-a-java21/demos/compatibilidad/`](./modulo-1-roadmap-java8-a-java21/demos/compatibilidad/)
 
-## Módulo 2. Evolución del Lenguaje Java (6h) — se completa hoy
+## Módulo 2. Evolución del Lenguaje Java (6h)
 - [`modulo-2-evolucion-lenguaje/teoria.md`](./modulo-2-evolucion-lenguaje/teoria.md)
-- Demos (ejecutables con `java Archivo.java`, JDK 21+):
-  - Sesión 1 (ya vista): `demos/01-var/`, `demos/02-switch-expressions/`, `demos/03-text-blocks/`
-  - Sesión 2: `demos/04-records-sealed/`, `demos/05-pattern-matching/`, `demos/06-streams-optional/`
-- Laboratorio clásico (referencia sin Maven): [`laboratorio/`](./modulo-2-evolucion-lenguaje/laboratorio/)
-- **Ejercicios con tests (usar en clase):** [`ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/)
+- Demos: `demos/01-var/` … `demos/06-streams-optional/`, `demos/07-comentarios-javadoc/`
+- Laboratorio clásico: [`laboratorio/`](./modulo-2-evolucion-lenguaje/laboratorio/)
+- **Ejercicios con tests:** [`ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/) (incluye Ej. 06: JavaDoc `///` y `{@snippet}`)
 
-## Cómo correr cualquier demo
+## Módulo 3. Concurrencia Moderna con Java 21 (5h)
+- [`modulo-3-concurrencia-moderna/teoria.md`](./modulo-3-concurrencia-moderna/teoria.md)
+- Demos:
+  - `demos/01-concurrencia-java8/`
+  - `demos/02-executor-completablefuture/`
+  - `demos/03-virtual-threads/`
+  - `demos/04-structured-concurrency/` (preview: `java --source 21 --enable-preview …`)
+  - `demos/05-scoped-values/` (preview)
+  - `demos/06-casos-uso/`
+- Laboratorio clásico: [`laboratorio/`](./modulo-3-concurrencia-moderna/laboratorio/)
+- **Ejercicios con tests:** [`ejercicios/`](./modulo-3-concurrencia-moderna/ejercicios/)
+
+## Cómo correr demos
 
 ```bash
+# Demos estables
 java ruta/al/Archivo.java
+
+# Demos preview (Structured Concurrency / Scoped Values en Java 21)
+java --source 21 --enable-preview ruta/al/Archivo.java
 ```
 
 Requiere JDK 21+.
 
-## Cómo correr los ejercicios
+## Cómo correr ejercicios
 
 ```bash
-cd modulo-2-evolucion-lenguaje/ejercicios
-mvn test
-# o un ejercicio:
-mvn test -Dtest=RecapLenguajeTest
+cd modulo-2-evolucion-lenguaje/ejercicios && mvn test
+cd modulo-3-concurrencia-moderna/ejercicios && mvn test
 ```

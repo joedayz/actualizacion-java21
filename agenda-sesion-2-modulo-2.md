@@ -32,10 +32,14 @@ Esta sesión **termina el Módulo 2** (no se avanza al Módulo 3).
 | | 10 min | Teoría (sección 6) + demo `06-streams-optional`. |
 | | **15 min** | **Práctica:** Ejercicio 04 — `mvn test -Dtest=StreamsOptionalExercisesTest` |
 | | 10 min | Solución en vivo (`toList()`, `List.of`, `getFirst`/`getLast`). |
-| 3:10–4:00 | **50 min** | **Bloque E — Laboratorio integrador** |
+| 3:10–3:50 | **40 min** | **Bloque E — Laboratorio integrador** |
 | | 5 min | Enunciado: modernizar `OrderService` (estilo Java 8 → Java 21). Checklist en la clase. |
-| | **30 min** | **Práctica:** Ejercicio 05 — `mvn test -Dtest=OrderServiceTest` |
-| | 15 min | Solución en vivo + cierre del módulo. Anticipo Módulo 3 (Virtual Threads) para la próxima sesión. |
+| | **25 min** | **Práctica:** Ejercicio 05 — `mvn test -Dtest=OrderServiceTest` |
+| | 10 min | Solución en vivo. |
+| 3:50–4:00 | **10 min** | **Bloque F — Comentarios / JavaDoc moderno (Ej. 06)** |
+| | 3 min | Demo `07-comentarios-javadoc` (`/**`+HTML vs `{@snippet}` vs `///`). |
+| | **5 min** | **Práctica rápida:** `mvn test -Dtest=ComentariosModernosTest` |
+| | 2 min | Solución + cierre. Anticipo Módulo 3 (Virtual Threads). |
 
 **Total práctica de alumnos:** ~100 min · **Total explicación/demos:** ~130 min · **Descanso:** 10 min.
 
@@ -68,6 +72,12 @@ Esta sesión **termina el Módulo 2** (no se avanza al Módulo 3).
 - Al inicio la **lógica de negocio ya pasa**; fallan los tests de modernización de tipos.
 - Meta: records + sealed + (idealmente) streams, switch expression, text block en el recibo.
 - Cifras de negocio: subtotal **4390**, 10% → **3951**.
+
+### Ejercicio 06 — Comentarios / JavaDoc
+- `formatearNombre`: documentar con `///` (Markdown, JEP 467).
+- `porcentaje`: JavaDoc `/** */` con `{@snippet` (JEP 413, Java 18).
+- Recordar: `///` compila en cualquier JDK; `javadoc` lo trata como doc desde **JDK 23**.
+- Trampa: dentro de text blocks, `//` es texto del string.
 
 ---
 
