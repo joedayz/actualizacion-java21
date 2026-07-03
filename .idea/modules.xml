@@ -6,6 +6,8 @@
       <module fileurl="file://$PROJECT_DIR$/modulo-2-evolucion-lenguaje/demos/demos.iml" filepath="$PROJECT_DIR$/modulo-2-evolucion-lenguaje/demos/demos.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulo-1-roadmap-java8-a-java21/modulo-1-roadmap-java8-a-java21.iml" filepath="$PROJECT_DIR$/modulo-1-roadmap-java8-a-java21/modulo-1-roadmap-java8-a-java21.iml" />
       <module fileurl="file://$PROJECT_DIR$/modulo-2-evolucion-lenguaje/modulo-2-evolucion-lenguaje.iml" filepath="$PROJECT_DIR$/modulo-2-evolucion-lenguaje/modulo-2-evolucion-lenguaje.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulo-3-concurrencia-moderna/demos/modulo-3-demos.iml" filepath="$PROJECT_DIR$/modulo-3-concurrencia-moderna/demos/modulo-3-demos.iml" />
+      <module fileurl="file://$PROJECT_DIR$/modulo-3-concurrencia-moderna/modulo-3-concurrencia-moderna.iml" filepath="$PROJECT_DIR$/modulo-3-concurrencia-moderna/modulo-3-concurrencia-moderna.iml" />
     </modules>
   </component>
 </project>

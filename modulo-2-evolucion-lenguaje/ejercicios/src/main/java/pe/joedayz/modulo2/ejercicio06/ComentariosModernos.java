@@ -18,38 +18,39 @@ public final class ComentariosModernos {
 
     private ComentariosModernos() {}
 
-    // -------------------------------------------------------------------------
-    // TODO 1: documenta formatearNombre con líneas que empiecen por tres barras.
-    //
-    // Requisitos del comentario Markdown:
-    //   - al menos 2 líneas cuyo texto (tras espacios) empiece por tres barras
-    //   - usar backticks en algún punto, p.ej. alrededor de Ana
-    //   - incluir @param nombre y @return
-    //
-    // Lógica:
-    //   - null o blank → IllegalArgumentException
-    //   - si no: strip + primera letra mayúscula + resto minúsculas
-    //   - "  aNA " → "Ana"
-    // -------------------------------------------------------------------------
-
+    /// Convierte el nombre a un formato simple tipo **Title Case**.
+    ///
+    /// Ejemplo: `"   aNA "` -> `Ana`
+    ///
+    /// @param nombre texto de entrada; no puede ser `null` ni balnk
+    /// @return nombre recortado con la primera letra en mayúscula y el resto en minúscula
     public static String formatearNombre(String nombre) {
-        // TODO: implementar + documentar con tres barras encima de este método
-        throw new UnsupportedOperationException("TODO: formatearNombre");
+        if(nombre==null || nombre.isBlank()){
+            throw new IllegalArgumentException("nombre no puede ser null ni blank");
+        }
+        String limpio = nombre.strip().toLowerCase();
+        return Character.toUpperCase(limpio.charAt(0)) + limpio.substring(1);
     }
 
-    // -------------------------------------------------------------------------
-    // TODO 2: documenta porcentaje con JavaDoc tradicional /** ... */
-    //         e incluye dentro un ejemplo con la etiqueta snippet (Java 18).
-    //
-    // Lógica:
-    //   - total <= 0 → IllegalArgumentException
-    //   - si no: (parte * 100) / total  (división entera)
-    //   - porcentaje(1, 4) → 25
-    // -------------------------------------------------------------------------
+    /**
+     * Calcula el porcentaje entero de {@code parte} respecto a un {@code total}.
+     *
+     * <p>Ejemplo de uso:
+     * {@snippet :
+     *   int valor = ComentariosModernos.porcentaje(1, 4); // 25
+     * }
+     *
+     * @param parte cantidad parcial
+     * @param total cantidad total; debe ser {@code > 0}
+     * @return porcentaje entero  {@code (parte / total) * 100 / total}
+     * @throws IllegalArgumentException si {@code total <= 0}
+     */
 
     public static int porcentaje(int parte, int total) {
-        // TODO: implementar + documentar con /** */ y etiqueta snippet
-        throw new UnsupportedOperationException("TODO: porcentaje");
+        if(total<=0){
+            throw new IllegalArgumentException("total debe ser > 0");
+        }
+        return (parte * 100) / total;
     }
 
     /**

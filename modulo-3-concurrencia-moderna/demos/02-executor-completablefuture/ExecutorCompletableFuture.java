@@ -35,7 +35,7 @@ public class ExecutorCompletableFuture {
                         throw new RuntimeException("servicio caído");
                     }, pool)
                     .exceptionally(ex -> "valor-por-defecto")
-                    .get(3, TimeUnit.SECONDS);
+                    .get(3, TimeUnit.SECONDS).toString();
             System.out.println(fallback);
         } finally {
             pool.shutdown();
