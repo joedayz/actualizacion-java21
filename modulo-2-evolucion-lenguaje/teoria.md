@@ -1,11 +1,13 @@
 # Módulo 2. Evolución del Lenguaje Java (6 horas totales)
 
-> **Hoy solo se cubre la Sección 1 (`var`), Sección 2 (Switch Expressions) y Sección 3 (Text Blocks) — aprox. 1 hora.**
-> Las secciones 4-6 y el laboratorio quedan preparados para la siguiente sesión.
+> **Sesión 1 (ya cubierta, ~1 h):** Secciones 1–3 (`var`, Switch Expressions, Text Blocks).
+> **Sesión 2 (hoy, 4 h):** Recap con práctica + Secciones 4–6 + laboratorio con tests JUnit 5.
+> Agenda detallada: [`../agenda-sesion-2-modulo-2.md`](../agenda-sesion-2-modulo-2.md).
+> Ejercicios Maven: [`ejercicios/`](./ejercicios/).
 
 ---
 
-## HOY — Sección 1: Inferencia de tipos con `var` (15 min)
+## SESIÓN 1 — Sección 1: Inferencia de tipos con `var` (15 min)
 
 ### Teoría
 - Introducido en **Java 10** (JEP 286).
@@ -26,7 +28,7 @@ Ver `demos/01-var/Var.java`.
 
 ---
 
-## HOY — Sección 2: Switch Expressions (25 min)
+## SESIÓN 1 — Sección 2: Switch Expressions (25 min)
 
 ### Teoría
 - Estables desde **Java 14** (JEP 361), preview desde Java 12.
@@ -41,7 +43,7 @@ Ver `demos/02-switch-expressions/SwitchExpressions.java` — muestra lado a lado
 
 ---
 
-## HOY — Sección 3: Text Blocks (15 min)
+## SESIÓN 1 — Sección 3: Text Blocks (15 min)
 
 ### Teoría
 - Estables desde **Java 15** (JEP 378), preview desde Java 13.
@@ -53,12 +55,20 @@ Ver `demos/02-switch-expressions/SwitchExpressions.java` — muestra lado a lado
 ### Demo en vivo
 Ver `demos/03-text-blocks/TextBlocks.java` — comparación de un JSON/SQL construido con concatenación (Java 8) vs. Text Block.
 
-### Cierre de la sesión de hoy
-"Hoy vimos 3 mejoras de **sintaxis y legibilidad**. La próxima sesión seguimos con cambios más profundos en el **modelo de datos** del lenguaje: Records, Sealed Classes y Pattern Matching — que cambian cómo modelamos y validamos el código, no solo cómo se ve."
+---
+
+## SESIÓN 2 — Recap práctico (Ejercicio 01)
+
+Antes de seguir con records y sealed, los participantes consolidan la sesión 1 en el proyecto Maven:
+
+```bash
+cd ejercicios
+mvn test -Dtest=RecapLenguajeTest
+```
 
 ---
 
-## PRÓXIMA SESIÓN — Sección 4: Records y Sealed Classes
+## SESIÓN 2 — Sección 4: Records y Sealed Classes
 
 ### Records (Java 16 estable, JEP 395)
 - Clases inmutables de datos con una sola línea: constructor, getters, `equals`, `hashCode` y `toString` generados automáticamente.
@@ -72,7 +82,14 @@ Ver `demos/03-text-blocks/TextBlocks.java` — comparación de un JSON/SQL const
 
 Ver `demos/04-records-sealed/RecordsSealed.java`.
 
-## PRÓXIMA SESIÓN — Sección 5: Pattern Matching for `instanceof` y `switch`
+### Práctica
+```bash
+mvn test -Dtest=RecordsSealedTest
+```
+
+---
+
+## SESIÓN 2 — Sección 5: Pattern Matching for `instanceof` y `switch`
 
 ### Pattern Matching for instanceof (Java 16 estable, JEP 394)
 - Elimina el cast redundante después de un `instanceof`.
@@ -86,7 +103,14 @@ Ver `demos/04-records-sealed/RecordsSealed.java`.
 
 Ver `demos/05-pattern-matching/PatternMatching.java`.
 
-## PRÓXIMA SESIÓN — Sección 6: Mejoras en Streams, Optional y colecciones inmutables
+### Práctica
+```bash
+mvn test -Dtest=PatternMatchingExercisesTest
+```
+
+---
+
+## SESIÓN 2 — Sección 6: Mejoras en Streams, Optional y colecciones inmutables
 
 - `Stream.toList()` (Java 16) como atajo a `collect(Collectors.toList())`.
 - Nuevos métodos en `Optional`: `ifPresentOrElse`, `or`, `stream()` (Java 9-11).
@@ -95,6 +119,22 @@ Ver `demos/05-pattern-matching/PatternMatching.java`.
 
 Ver `demos/06-streams-optional/StreamsOptional.java`.
 
-## PRÓXIMA SESIÓN — Laboratorio: Refactorización de código Java 8
+### Práctica
+```bash
+mvn test -Dtest=StreamsOptionalExercisesTest
+```
 
-Ver carpeta `laboratorio/` — código legado en estilo Java 8 (`LegacyOrderService.java`) que los participantes deben refactorizar aplicando todo lo visto en el módulo. Incluye `SolucionModerna.java` como solución de referencia (no repartir hasta el final del ejercicio).
+---
+
+## SESIÓN 2 — Laboratorio: Refactorización de código Java 8
+
+Proyecto Maven con tests (recomendado en clase):
+
+```bash
+mvn test -Dtest=OrderServiceTest
+```
+
+Referencia histórica sin Maven (misma idea de negocio): carpeta `laboratorio/` — `LegacyOrderService.java` y `SolucionModerna.java`.
+
+### Cierre del módulo
+"Hoy cerramos la evolución del **lenguaje**. La próxima sesión entramos a concurrencia moderna con Java 21: Virtual Threads (Project Loom) — Módulo 3."

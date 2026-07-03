@@ -2,25 +2,37 @@
 
 Basado en la propuesta comercial `Propuesta Comercial - Java 21.pdf` (JOEDAYZ academy, 40 horas, 9 módulos).
 
-## Empieza aquí
-- [`agenda-clase-4h.md`](./agenda-clase-4h.md) — Agenda minuto a minuto de la sesión de hoy (4 horas: Módulo 1 completo + inicio de Módulo 2).
+## Empieza aquí (Sesión 2 — hoy)
 
-## Módulo 1. Roadmap de Java 8 a Java 21 (3h) — HOY
-- [`modulo-1-roadmap-java8-a-java21/teoria.md`](./modulo-1-roadmap-java8-a-java21/teoria.md) — notas del expositor, línea de tiempo, tabla de versiones LTS.
-- [`modulo-1-roadmap-java8-a-java21/demos/compatibilidad/`](./modulo-1-roadmap-java8-a-java21/demos/compatibilidad/) — demo de compatibilidad hacia atrás (`javac --release 8/11/21`).
+- [`agenda-sesion-2-modulo-2.md`](./agenda-sesion-2-modulo-2.md) — Agenda de **4 horas** para terminar el Módulo 2 (ejercicios Maven + JUnit 5).
+- **Ejercicios (participantes):** [`modulo-2-evolucion-lenguaje/ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/) — `mvn test`.
+- **Soluciones (solo facilitador):** carpeta local `soluciones-modulo-2/` (gitignored, no va al repo).
 
-## Módulo 2. Evolución del Lenguaje Java (6h) — HOY solo la primera hora
-- [`modulo-2-evolucion-lenguaje/teoria.md`](./modulo-2-evolucion-lenguaje/teoria.md) — teoría completa del módulo, marcado qué se ve **HOY** vs. **PRÓXIMA SESIÓN**.
-- Demos (todas ejecutables con `java Archivo.java`, sin compilar aparte, usando JDK 21+):
-  - **Hoy:** `demos/01-var/`, `demos/02-switch-expressions/`, `demos/03-text-blocks/`
-  - **Próxima sesión:** `demos/04-records-sealed/`, `demos/05-pattern-matching/`, `demos/06-streams-optional/`
-  - **Próxima sesión (laboratorio):** [`laboratorio/`](./modulo-2-evolucion-lenguaje/laboratorio/) — refactorización de `LegacyOrderService.java` con solución de referencia en `SolucionModerna.java`.
+## Módulo 1. Roadmap de Java 8 a Java 21 (3h) — sesión anterior
+- [`modulo-1-roadmap-java8-a-java21/teoria.md`](./modulo-1-roadmap-java8-a-java21/teoria.md)
+- [`modulo-1-roadmap-java8-a-java21/demos/compatibilidad/`](./modulo-1-roadmap-java8-a-java21/demos/compatibilidad/)
+
+## Módulo 2. Evolución del Lenguaje Java (6h) — se completa hoy
+- [`modulo-2-evolucion-lenguaje/teoria.md`](./modulo-2-evolucion-lenguaje/teoria.md)
+- Demos (ejecutables con `java Archivo.java`, JDK 21+):
+  - Sesión 1 (ya vista): `demos/01-var/`, `demos/02-switch-expressions/`, `demos/03-text-blocks/`
+  - Sesión 2: `demos/04-records-sealed/`, `demos/05-pattern-matching/`, `demos/06-streams-optional/`
+- Laboratorio clásico (referencia sin Maven): [`laboratorio/`](./modulo-2-evolucion-lenguaje/laboratorio/)
+- **Ejercicios con tests (usar en clase):** [`ejercicios/`](./modulo-2-evolucion-lenguaje/ejercicios/)
 
 ## Cómo correr cualquier demo
-Todas las demos son archivos `.java` de un solo archivo (sin dependencias externas), pensadas para ejecutarse directamente:
 
 ```bash
 java ruta/al/Archivo.java
 ```
 
-Requiere JDK 21+ (verificado con JDK 25 usando `--release 21` donde aplica, ver demo de compatibilidad).
+Requiere JDK 21+.
+
+## Cómo correr los ejercicios
+
+```bash
+cd modulo-2-evolucion-lenguaje/ejercicios
+mvn test
+# o un ejercicio:
+mvn test -Dtest=RecapLenguajeTest
+```
