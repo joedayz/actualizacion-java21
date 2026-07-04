@@ -1,4 +1,14 @@
 target/
+out/
+
+# Compiled class files
+*.class
+
+# IntelliJ IDEA
+.idea/
+*.iml
+*.iws
+*.ipr
 
 # Soluciones del facilitador (no subir al repo de participantes)
 soluciones-modulo-2/
