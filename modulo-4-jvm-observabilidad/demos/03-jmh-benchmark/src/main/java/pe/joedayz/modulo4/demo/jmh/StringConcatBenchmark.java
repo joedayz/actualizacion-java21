@@ -8,6 +8,8 @@ import org.openjdk.jmh.annotations.Measurement;
 import org.openjdk.jmh.annotations.Mode;
 import org.openjdk.jmh.annotations.OutputTimeUnit;
 import org.openjdk.jmh.annotations.Param;
+import org.openjdk.jmh.annotations.Scope;
+import org.openjdk.jmh.annotations.State;
 import org.openjdk.jmh.annotations.Warmup;
 
 @BenchmarkMode(Mode.AverageTime)
@@ -15,6 +17,7 @@ import org.openjdk.jmh.annotations.Warmup;
 @Warmup(iterations = 2, time = 1)
 @Measurement(iterations = 3, time = 1)
 @Fork(1)
+@State(Scope.Benchmark)
 public class StringConcatBenchmark {
 
     @Param({"10", "100", "1000"})

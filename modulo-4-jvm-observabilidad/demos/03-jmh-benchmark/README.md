@@ -12,13 +12,13 @@ Compara `String +=` en bucle vs `StringBuilder`.
 ```bash
 cd modulo-4-jvm-observabilidad/demos/03-jmh-benchmark
 mvn package
-java -jar target/benchmarks.jar StringConcatBenchmark
+java -jar target/benchmarks.jar pe.joedayz.modulo4.demo.jmh.StringConcatBenchmark
 ```
 
 Opcional: filtrar un solo benchmark:
 
 ```bash
-java -jar target/benchmarks.jar StringConcatBenchmark.concatWithBuilder
+java -jar target/benchmarks.jar pe.joedayz.modulo4.demo.jmh.StringConcatBenchmark.concatWithBuilder
 ```
 
 ## Qué observar en clase
