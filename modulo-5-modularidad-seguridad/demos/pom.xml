@@ -31,6 +31,7 @@
                             <sources>
                                 <source>01-jpms-runtime</source>
                                 <source>02-reflection-ilegal</source>
+                                <source>03-jdeps-internals</source>
                                 <source>04-tls-defaults</source>
                                 <source>05-apis-cambiadas</source>
                             </sources>

@@ -1,3 +1,6 @@
+import javax.script.ScriptEngine;
+import javax.script.ScriptEngineManager;
+
 /**
  * Demo: APIs removidas/deprecadas relevantes en la migración Java 8 → 21.
  * Ejecutar: java ApisCambiadas.java
@@ -30,5 +33,16 @@ public class ApisCambiadas {
         System.out.println("TLS:");
         System.out.println("  - TLS 1.0 / 1.1 deshabilitados por defecto");
         System.out.println("  - Actualizar servidores remotos a TLS 1.2+");
+
+
+        ScriptEngine engine =
+                new ScriptEngineManager().getEngineByName("JavaScript");
+        System.out.println();
+        System.out.println(engine == null
+                ? "Nashorn NO disponible"
+                : "Nashorn disponible");
+
+        System.out.println();
+        System.out.println(System.getSecurityManager());
     }
 }

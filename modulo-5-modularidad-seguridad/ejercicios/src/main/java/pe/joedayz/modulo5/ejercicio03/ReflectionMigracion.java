@@ -28,8 +28,14 @@ public final class ReflectionMigracion {
      * </ul>
      */
     public static EstrategiaMigracion recomendar(String origen, boolean hayVersionNuevaDependencia) {
-        // TODO: origen = "CODIGO_PROPIO" | "LIBRERIA_TERCEROS" | "FRAMEWORK"
-        throw new UnsupportedOperationException("TODO: recomendar");
+        return switch (origen){
+          case "CODIGO_PROPIO" -> EstrategiaMigracion.USAR_API_PUBLICA;
+          case "LIBRERIA_TERCEROS" -> hayVersionNuevaDependencia
+              ? EstrategiaMigracion.ACTUALIZAR_DEPENDENCIA
+                : EstrategiaMigracion.ADD_OPENS_TEMPORAL;
+            case "FRAMEWORK" -> EstrategiaMigracion.ADD_OPENS_TEMPORAL;
+            default -> throw new IllegalArgumentException("Origen desconocido: " + origen);
+        };
     }
 
     /**
@@ -40,7 +46,12 @@ public final class ReflectionMigracion {
      * {@code javax.annotation.PostConstruct} → coordenada jakarta
      */
     public static String sugerirDependenciaMaven(String apiRemovida) {
-        // TODO
-        throw new UnsupportedOperationException("TODO: sugerirDependenciaMaven");
+        if(apiRemovida.startsWith("javax.xml.bind.")) {
+            return "jakarta.xml.bind:jakarta.xml.bind-api";
+        } else if(apiRemovida.startsWith("javax.annotation.")) {
+            return "jakarta.annotation:jakarta.annotation-api";
+        } else {
+            return "revisar dependencia en mvnrepository.com";
+        }
     }
 }

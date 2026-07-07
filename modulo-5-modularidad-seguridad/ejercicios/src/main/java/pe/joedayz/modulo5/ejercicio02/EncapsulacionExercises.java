@@ -12,8 +12,12 @@ public final class EncapsulacionExercises {
      * ({@code jdk.internal.*}, {@code sun.*}, {@code com.sun.*}).
      */
     public static boolean esPaqueteInternoJdk(String qualifiedName) {
-        // TODO
-        throw new UnsupportedOperationException("TODO: esPaqueteInternoJdk");
+        if(qualifiedName == null || qualifiedName.isBlank()) {
+            return false;
+        }
+        return qualifiedName.startsWith("jdk.internal.")
+                || qualifiedName.startsWith("sun.")
+                || qualifiedName.startsWith("com.sun.");
     }
 
     /**
@@ -23,8 +27,7 @@ public final class EncapsulacionExercises {
      * <p>Formato: {@code --add-opens modulo/pkg=destino}
      */
     public static String construirAddOpens(String modulo, String pkg, String destino) {
-        // TODO
-        throw new UnsupportedOperationException("TODO: construirAddOpens");
+       return "--add-opens " + modulo + "/" + pkg + "=" + destino;
     }
 
     /**
@@ -33,7 +36,11 @@ public final class EncapsulacionExercises {
      */
     public static boolean puedeLeerseConExports(String moduloExportador, String paquete,
             String moduloLector, String moduleInfoExportador) {
-        // TODO: buscar "exports paquete" o "exports paquete to moduloLector"
-        throw new UnsupportedOperationException("TODO: puedeLeerseConExports");
+
+        String exportTo = "exports " + paquete + " to " + moduloLector + ";";
+        String exportPublic = "exports " + paquete;
+        return  moduleInfoExportador.contains(exportTo)
+        || (moduleInfoExportador.contains(exportPublic)
+                && !moduleInfoExportador.contains(exportPublic + " to "));
     }
 }

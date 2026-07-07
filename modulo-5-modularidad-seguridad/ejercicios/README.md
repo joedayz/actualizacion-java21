@@ -64,3 +64,6 @@ mvn test -Dtest=MigracionEmpresarialTest
 mvn -q package -DskipTests
 jdeps --jdk-internals --multi-release 21 target/modulo-5-ejercicios-1.0.0-SNAPSHOT.jar
 ```
+
+**Salida vacía = correcto** para este JAR (no usa APIs internas en bytecode).
+Para ver hallazgos reales, usa el JAR de demos: ver `demos/03-jdeps-internals/README.md`.

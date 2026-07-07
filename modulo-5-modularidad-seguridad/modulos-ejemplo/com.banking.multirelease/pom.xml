@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.example</groupId>
+        <artifactId>modulo08-parent</artifactId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+
+    <artifactId>com.banking.multirelease</artifactId>
+    <name>Banking Multi-Release Module</name>
+    <description>Ejemplo de Multi-Release Module Archives en Java 21</description>
+
+    <properties>
+        <maven.compiler.source>21</maven.compiler.source>
+        <maven.compiler.target>21</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    </properties>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.13.0</version>
+                <executions>
+                    <!-- Compilación base (Java 9+) -->
+                    <execution>
+                        <id>base</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>9</source>
+                            <target>9</target>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <compileSourceRoots>
+                                <compileSourceRoot>${basedir}/src/main/java</compileSourceRoot>
+                            </compileSourceRoots>
+                            <outputDirectory>${project.build.outputDirectory}</outputDirectory>
+                            <failOnError>true</failOnError>
+                        </configuration>
+                    </execution>
+
+                    <!-- Compilación para Java 11 -->
+                    <execution>
+                        <id>java-11</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>11</source>
+                            <target>11</target>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <compileSourceRoots>
+                                <compileSourceRoot>${basedir}/src/main/java-11</compileSourceRoot>
+                            </compileSourceRoots>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/11</outputDirectory>
+                            <skipMain>true</skipMain>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </execution>
+
+                    <!-- Compilación para Java 17 -->
+                    <execution>
+                        <id>java-17</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>17</source>
+                            <target>17</target>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <compileSourceRoots>
+                                <compileSourceRoot>${basedir}/src/main/java-17</compileSourceRoot>
+                            </compileSourceRoots>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/17</outputDirectory>
+                            <skipMain>true</skipMain>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </execution>
+
+                    <!-- Compilación para Java 21 -->
+                    <execution>
+                        <id>java-21</id>
+                        <phase>compile</phase>
+                        <goals>
+                            <goal>compile</goal>
+                        </goals>
+                        <configuration>
+                            <source>21</source>
+                            <target>21</target>
+                            <includes>
+                                <include>**/*.java</include>
+                            </includes>
+                            <compileSourceRoots>
+                                <compileSourceRoot>${basedir}/src/main/java-21</compileSourceRoot>
+                            </compileSourceRoots>
+                            <outputDirectory>${project.build.outputDirectory}/META-INF/versions/21</outputDirectory>
+                            <skipMain>true</skipMain>
+                            <failOnError>false</failOnError>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- Empaquetar como Multi-Release JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>3.4.1</version>
+                <configuration>
+                    <archive>
+                        <manifestEntries>
+                            <!-- IMPORTANTE: Esto marca el JAR como Multi-Release -->
+                            <Multi-Release>true</Multi-Release>
+                        </manifestEntries>
+                    </archive>
+                </configuration>
+            </plugin>
+
+            <!-- Mostrar estructura del JAR -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>3.1.0</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <configuration>
+                            <target>
+                                <echo message="📦 Contenido del Multi-Release JAR:" />
+                                <exec executable="jar" os="Mac OS X,Linux">
+                                    <arg value="tf" />
+                                    <arg value="${project.build.directory}/${project.build.finalName}.jar" />
+                                </exec>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+        </plugins>
+    </build>
+
+</project>
+
