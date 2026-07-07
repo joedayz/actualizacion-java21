@@ -72,5 +72,14 @@ Requiere JDK 21+.
 cd modulo-2-evolucion-lenguaje/ejercicios && mvn test
 cd modulo-3-concurrencia-moderna/ejercicios && mvn test
 cd modulo-4-jvm-observabilidad/ejercicios && mvn test
-cd modulo-5-modularidad-seguridad/ejercicios && mvn test
+cd modulo-5-modularidad-seguridad && mvn test
 ```
+
+## IntelliJ IDEA (módulos 4 y 5)
+
+Abre el `pom.xml` raíz del módulo (no el repo completo):
+
+- Módulo 4: `modulo-4-jvm-observabilidad/pom.xml`
+- Módulo 5: `modulo-5-modularidad-seguridad/pom.xml`
+
+IntelliJ importará ejercicios, demos y laboratorio como submódulos Maven.

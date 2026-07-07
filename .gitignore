@@ -1,6 +1,9 @@
 target/
 out/
 
+# JFR recordings (pueden capturar datos sensibles del entorno local)
+*.jfr
+
 # Compiled class files
 *.class
 

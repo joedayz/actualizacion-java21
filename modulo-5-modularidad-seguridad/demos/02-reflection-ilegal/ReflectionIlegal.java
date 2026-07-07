@@ -1,4 +1,5 @@
 import java.lang.reflect.Field;
+import java.lang.reflect.InaccessibleObjectException;
 
 /**
  * Demo: encapsulación fuerte — reflection sobre API interna del JDK.
