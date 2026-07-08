@@ -9,11 +9,33 @@ Mini **Spring Boot 2.7** con código legacy real:
 
 Sirve para practicar las **3 herramientas** de la Sección 3 (además del Ejercicio 02 manual).
 
+## Scripts incluidos
+
+| SO | Script | Uso |
+|----|--------|-----|
+| **Windows** | `migrate.ps1` | `.\migrate.ps1 dry-run` |
+| macOS / Linux | `migrate.sh` | `./migrate.sh dry-run` |
+
+Comandos del script: `dry-run` (preview), `run` (aplicar), `verify` (revisar javax/jakarta).
+
+---
+
 ## Antes de empezar
+
+### Windows (PowerShell)
+
+```powershell
+cd modulo-6-ecosistema-frameworks\migracion-legacy
+git status
+mvn -q clean compile
+Select-String -Path src\main\java\**\*.java -Pattern "javax\."
+```
+
+### macOS / Linux (bash)
 
 ```bash
 cd modulo-6-ecosistema-frameworks/migracion-legacy
-git status   # idealmente working tree limpio
+git status
 mvn -q clean compile
 grep -R "javax\." src/main/java
 ```
@@ -28,27 +50,51 @@ El `pom.xml` ya trae el plugin configurado.
 
 ### Vista previa (no modifica archivos)
 
-```bash
+**Windows / macOS / Linux (Maven es igual):**
+
+```powershell
 mvn -U org.openrewrite.maven:rewrite-maven-plugin:dryRun
 ```
 
 Revisa el diff en consola: imports `javax.*` → `jakarta.*`, parent Spring Boot 3.x, driver JDBC, etc.
 
+También se genera un patch en `target/rewrite/rewrite.patch`.
+
 ### Aplicar cambios
 
-```bash
+```powershell
 mvn -U org.openrewrite.maven:rewrite-maven-plugin:run
 mvn clean compile
+```
+
+**Verificar imports jakarta:**
+
+```powershell
+# Windows
+Select-String -Path src\main\java\**\*.java -Pattern "jakarta\."
+
+# macOS / Linux
 grep -R "jakarta\." src/main/java
 ```
 
 Para revertir: `git checkout -- .`
 
-### Atajo con script
+### Atajo con script (recomendado)
+
+**Windows:**
+
+```powershell
+.\migrate.ps1 dry-run
+.\migrate.ps1 run
+.\migrate.ps1 verify
+```
+
+**macOS / Linux:**
 
 ```bash
 ./migrate.sh dry-run
 ./migrate.sh run
+./migrate.sh verify
 ```
 
 ---
@@ -69,20 +115,6 @@ Para revertir: `git checkout -- .`
 
 Herramienta aparte (no Maven). Útil cuando quieres un informe guiado SB2 → SB3.
 
-```bash
-# Instalación (requiere red)
-curl -G https://start.springboot.io/starter.zip \
-  -d dependencies=spring-boot-migrator \
-  -d type=maven-project \
-  -d baseDir=sbm-demo \
-  -d groupId=pe.joedayz \
-  -d artifactId=sbm-demo \
-  -d name=sbm-demo \
-  -d packageName=pe.joedayz.sbm \
-  -d javaVersion=17 \
-  -o sbm-demo.zip
-```
-
 En clase, lo más práctico es **mostrar la UI/CLI de SBM** apuntando a esta carpeta `migracion-legacy` y contrastar el plan de migración con OpenRewrite.
 
 Documentación: https://github.com/spring-projects-experimental/spring-boot-migrator
@@ -95,8 +127,8 @@ Documentación: https://github.com/spring-projects-experimental/spring-boot-migr
 |-----|-----------|
 | 5 | Demo `MigracionJakarta` (módulo demos) — mapa conceptual |
 | 15 | Ejercicio 02 manual (`JakartaMigracionExercisesTest`) |
-| 10 | Este lab: `mvn rewrite:dryRun` y revisar diff |
-| 10 | `mvn rewrite:run` **o** IntelliJ Migrate to Jakarta |
+| 10 | Este lab: `.\migrate.ps1 dry-run` (o `./migrate.sh dry-run`) y revisar diff |
+| 10 | `.\migrate.ps1 run` **o** IntelliJ Migrate to Jakarta |
 | 5 | Mostrar SBM como alternativa / informe |
 
 ---
@@ -115,7 +147,19 @@ Misma lógica; distinta escala.
 
 ## Verificación post-migración
 
+### Windows (PowerShell)
+
+```powershell
+.\migrate.ps1 verify
+mvn dependency:tree | Select-String -Pattern "javax|jakarta"
+mvn spring-boot:run
+Invoke-WebRequest http://localhost:8080/api/health
+```
+
+### macOS / Linux
+
 ```bash
+./migrate.sh verify
 mvn dependency:tree | grep -E "javax\.|jakarta\."
 mvn spring-boot:run
 curl http://localhost:8080/api/health
