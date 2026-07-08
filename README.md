@@ -87,14 +87,15 @@ cd modulo-2-evolucion-lenguaje/ejercicios && mvn test
 cd modulo-3-concurrencia-moderna/ejercicios && mvn test
 cd modulo-4-jvm-observabilidad/ejercicios && mvn test
 cd modulo-5-modularidad-seguridad && mvn test
-cd modulo-6-ecosistema-frameworks/ejercicios && mvn test
+cd modulo-6-ecosistema-frameworks && mvn test
 ```
 
-## IntelliJ IDEA (módulos 4 y 5)
+## IntelliJ IDEA (módulos 4, 5 y 6)
 
 Abre el `pom.xml` raíz del módulo (no el repo completo):
 
 - Módulo 4: `modulo-4-jvm-observabilidad/pom.xml`
 - Módulo 5: `modulo-5-modularidad-seguridad/pom.xml`
+- Módulo 6: `modulo-6-ecosistema-frameworks/pom.xml`
 
 IntelliJ importará ejercicios, demos y laboratorio como submódulos Maven.

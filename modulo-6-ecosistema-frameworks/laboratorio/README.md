@@ -17,6 +17,10 @@ Analizar `LegacyEcosystemPom.xml` y `LegacyEcosystemService.java`, que represent
 cd ../ejercicios && mvn test -Dtest=MigracionEcosistemaTest
 ```
 
+## IntelliJ IDEA
+
+Abre `modulo-6-ecosistema-frameworks/pom.xml` como proyecto Maven. Las clases del laboratorio están en el submódulo `modulo-6-laboratorio`; usa Run en `LegacyEcosystemService` o `SolucionMigrada`.
+
 ## Checklist de migración (discusión en grupo)
 
 - [ ] Parent Spring Boot 2.7 → 3.4.x

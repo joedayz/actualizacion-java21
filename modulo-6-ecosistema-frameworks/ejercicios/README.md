@@ -7,6 +7,27 @@ Proyecto Maven con **5 ejercicios** y tests **JUnit 5**. Completa los `TODO` has
 - JDK **21+**
 - Maven **3.9+**
 
+## IntelliJ IDEA
+
+Abre el proyecto Maven **raíz del módulo** (no la carpeta del repo completo):
+
+```
+modulo-6-ecosistema-frameworks/pom.xml
+```
+
+IntelliJ importará 4 submódulos:
+
+| Módulo | Contenido | Ejecutar |
+|--------|-----------|----------|
+| `modulo-6-ejercicios` | Ejercicios con tests JUnit | Click derecho en `*Test` → Run |
+| `modulo-6-demos` | `MigracionJakarta`, `SpringBoot3Cambios`, `Hibernate6Cambios`, `JdbcCompatibilidad` | Run en la clase `main` |
+| `modulo-6-laboratorio` | `LegacyEcosystemService`, `SolucionMigrada` | Run en la clase `main` |
+| `migracion-legacy` | Spring Boot 2 + javax (lab OpenRewrite / IntelliJ / SBM) | Ver `migracion-legacy/README.md` |
+
+Tras abrir el `pom.xml`, espera a que Maven termine de importar y verifica que el SDK del proyecto sea **21+** (`File → Project Structure → Project SDK`).
+
+Las carpetas `demos/01-maven-moderno`, `02-gradle-moderno` y `07-dependencias` son guías en Markdown (comandos Maven/Gradle), no clases Java.
+
 ## Cómo trabajar
 
 ```bash

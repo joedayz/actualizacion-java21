@@ -171,6 +171,19 @@ cannot find symbol: class Entity
 ### Demo
 Ver `demos/03-jakarta-migracion/MigracionJakarta.java`.
 
+### Lab hands-on (OpenRewrite + IntelliJ + SBM)
+
+Mini Spring Boot 2 legacy listo para migrar:
+
+```bash
+cd migracion-legacy
+mvn clean compile
+./migrate.sh dry-run    # preview OpenRewrite
+./migrate.sh run        # aplicar (usa git para revertir)
+```
+
+Guía completa: [`migracion-legacy/README.md`](./migracion-legacy/README.md).
+
 ### Práctica
 ```bash
 mvn test -Dtest=JakartaMigracionExercisesTest
