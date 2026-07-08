@@ -31,6 +31,8 @@ public class MigracionJakarta {
         System.out.println("  javax.servlet-api      →  jakarta.servlet-api");
         System.out.println("  validation-api         →  jakarta.validation-api");
 
-        System.out.println("\nHerramientas: OpenRewrite, IntelliJ Migrate to Jakarta, Spring Boot Migrator");
+        System.out.println("\nHerramientas: OpenRewrite (Maven), plugin IntelliJ Jakarta Migration");
+        System.out.println("  https://plugins.jetbrains.com/plugin/30093-jakarta-migration-javax--jakarta-");
+        System.out.println("  Spring Boot Migrator (SBM)");
     }
 }

@@ -99,15 +99,28 @@ Para revertir: `git checkout -- .`
 
 ---
 
-## Herramienta 2 — IntelliJ *Migrate to Jakarta EE*
+## Herramienta 2 — Plugin [Jakarta Migration (javax → jakarta)](https://plugins.jetbrains.com/plugin/30093-jakarta-migration-javax--jakarta-)
+
+Herramienta vigente en IntelliJ (Community y Ultimate). Analiza el proyecto, muestra dependencias y aplica refactorings con OpenRewrite desde el IDE.
+
+### Instalación
+
+1. **Settings** (`Ctrl+Alt+S` / `Cmd+,`) → **Plugins** → **Marketplace**.
+2. Busca **Jakarta Migration** e instala [desde el Marketplace](https://plugins.jetbrains.com/plugin/30093-jakarta-migration-javax--jakarta-).
+3. Reinicia IntelliJ.
+
+### Uso en este lab
 
 1. Abre `modulo-6-ecosistema-frameworks/pom.xml` en IntelliJ.
 2. Navega al submódulo **`migracion-legacy`**.
-3. Click derecho en `src/main/java` → **Refactor** → **Migrate Packages and Classes** → **to Jakarta EE**.
-4. Revisa el preview y aplica.
-5. Compara con el resultado de OpenRewrite.
+3. **Tools** → **Jakarta Migration** (atajo: `Ctrl+Shift+J` / `Cmd+Shift+J`).
+4. En la ventana del plugin, **Analyze Project** y revisa el informe (`javax.*`, blockers, dependencias).
+5. Pestaña **Refactor**: aplica las recetas OpenRewrite y revisa el preview antes de confirmar.
+6. Compara el resultado con el diff de `./migrate.sh run` (Herramienta 1).
 
 **Tip:** haz esto en una rama o copia del proyecto; es destructivo como `rewrite:run`.
+
+> **Nota:** IntelliJ Ultimate incluye también **Refactor → Migrate Packages and Classes → to Jakarta EE**; para este curso usamos el plugin anterior, que es la opción actual recomendada y funciona en Community.
 
 ---
 
@@ -128,7 +141,7 @@ Documentación: https://github.com/spring-projects-experimental/spring-boot-migr
 | 5 | Demo `MigracionJakarta` (módulo demos) — mapa conceptual |
 | 15 | Ejercicio 02 manual (`JakartaMigracionExercisesTest`) |
 | 10 | Este lab: `.\migrate.ps1 dry-run` (o `./migrate.sh dry-run`) y revisar diff |
-| 10 | `.\migrate.ps1 run` **o** IntelliJ Migrate to Jakarta |
+| 10 | `.\migrate.ps1 run` **o** plugin [Jakarta Migration](https://plugins.jetbrains.com/plugin/30093-jakarta-migration-javax--jakarta-) |
 | 5 | Mostrar SBM como alternativa / informe |
 
 ---

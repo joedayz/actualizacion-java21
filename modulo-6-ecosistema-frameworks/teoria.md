@@ -157,7 +157,7 @@ mvn -U org.openrewrite.maven:rewrite-maven-plugin:run \
   -Drewrite.activeRecipes=org.openrewrite.java.spring.boot3.UpgradeSpringBoot_3_2
 ```
 
-También: IntelliJ *Migrate to Jakarta EE*, Spring Boot Migrator (SBM).
+También: plugin IntelliJ [Jakarta Migration (javax → jakarta)](https://plugins.jetbrains.com/plugin/30093-jakarta-migration-javax--jakarta-) (análisis + refactor OpenRewrite en el IDE) y Spring Boot Migrator (SBM).
 
 ### Errores típicos en compilación
 
