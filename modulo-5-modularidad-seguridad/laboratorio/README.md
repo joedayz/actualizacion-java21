@@ -15,3 +15,7 @@ Refactorizar `LegacyPlatformService.java`, que mezcla patrones incompatibles con
 ```bash
 cd ../ejercicios && mvn test -Dtest=MigracionEmpresarialTest
 ```
+
+## IntelliJ IDEA
+
+Abre `modulo-5-modularidad-seguridad/pom.xml` como proyecto Maven. Las clases del laboratorio están en el submódulo `modulo-5-laboratorio`; usa Run en `LegacyPlatformService` o `SolucionMigrada`.
