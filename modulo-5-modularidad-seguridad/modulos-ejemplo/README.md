@@ -1,247 +1,143 @@
-# Modulo 08 - Java Modules (Project Jigsaw)
+# Demo JPMS — Sistema bancario modular (Java 21)
 
-Proyecto educativo que demuestra el uso de módulos en Java 21, conocido como Project Jigsaw.
+Proyecto educativo de **Project Jigsaw**: encapsulación fuerte, dependencias explícitas y `module-info.java`.
 
-Este es un sistema bancario modular que implementa arquitectura de módulos con encapsulación fuerte, dependencias explícitas y separación clara de responsabilidades.
+**Requisitos:** JDK 21+, Maven 3.8+
 
-## 📚 Documentación Incluida
+## Inicio rápido
 
-1. **README.md** (este archivo) - Información general del proyecto
-2. **EJEMPLOS_PRACTICOS.md** - Guía detallada con ejemplos código
-3. **GUIA_ENSENANZA.md** - Guía completa para enseñar el tema
-4. **ERRORES_COMUNES.md** - Errores frecuentes y sus soluciones
-5. **run-demo.sh** - Script para ejecutar fácilmente el proyecto
+### IntelliJ
 
-## 🏗️ Estructura de Módulos
+Abre `modulo-5-modularidad-seguridad/modulos-ejemplo/pom.xml` (no el repo completo). SDK **21+**.
 
-```
-Nivel 3 (Aplicación):
-└─ com.banking.app
-   ├─ BankingApplication.java     ← Aplicación principal interactiva
-   ├─ ModuleInspector.java        ← Herramienta de inspección
-   └─ ModulesConceptsGuide.java   ← Guía de conceptos
-
-Nivel 2 (Servicios):
-├─ com.banking.ui
-│  └─ BankingConsoleUI.java       ← Interfaz de usuario
-│
-└─ com.banking.operations
-   ├─ SavingsAccount.java         ← Implementación (PRIVADA)
-   └─ AccountFactory.java         ← Punto de entrada (PÚBLICO)
-
-Nivel 1 (Núcleo):
-└─ com.banking.core
-   ├─ BankAccount.java            ← Interfaz pública
-   ├─ InsufficientFundsException.java
-   └─ InvalidAccountOperationException.java
-```
-
-### Características por Módulo
-
-| Módulo | Exporta | Requiere | Propósito |
-|--------|---------|----------|-----------|
-| **core** | account, exception | (ninguno) | Define el contrato |
-| **operations** | factory | core | Implementa de forma encapsulada |
-| **ui** | console | core, operations | Proporciona interfaz |
-| **app** | (nada) | core, operations, ui | Integra todo |
-
-## ✨ Características Demostradas
-
-- ✅ **Encapsulación de módulos**: Paquetes internos no exportados
-- ✅ **Dependencias explícitas**: Validadas en tiempo de compilación
-- ✅ **Module Graph**: Visualización de dependencias
-- ✅ **Reflection sobre módulos**: Análisis en runtime
-- ✅ **Validación automática**: Detección de ciclos y errores
-- ✅ **Separación de responsabilidades**: Cada módulo tiene un propósito
-
-## 🚀 Inicio Rápido
-
-### Requisitos
-- Java 21+
-- Maven 3.8+
-
-### Compilar
+### Terminal
 
 ```bash
 cd modulo-5-modularidad-seguridad/modulos-ejemplo
-mvn clean compile
+
+mvn clean compile          # compilar
+./run-demo.sh inspect      # ver exports/requires en runtime
+./run-demo.sh app          # app interactiva (menú consola)
+./run-demo.sh              # ver todas las opciones
 ```
 
-### Ejecutar
+## Estructura de módulos
 
-```bash
-# Opción 1: Usando el script
-./run-demo.sh app              # Ejecutar aplicación
-./run-demo.sh inspect          # Inspeccionar módulos
-./run-demo.sh build            # Solo compilar
-./run-demo.sh jar              # Empaquetar
+```
+com.banking.app          ← aplicación (no exporta nada)
+  requires core, operations, ui
 
-# Opción 2: Usando Maven directamente
-mvn -pl com.banking.app exec:java \
-    -Dexec.mainClass="com.banking.app.BankingApplication"
+com.banking.ui           ← interfaz consola
+  exports com.banking.ui.console
+  requires core, operations
 
-mvn -pl com.banking.app exec:java \
-    -Dexec.mainClass="com.banking.app.ModuleInspector"
+com.banking.operations   ← implementación encapsulada
+  exports com.banking.operations.factory
+  requires core
+  (SavingsAccount NO se exporta)
+
+com.banking.core         ← contratos públicos
+  exports account, exception
 ```
 
-## 📖 Contenido Didáctico
+| Módulo | Exporta | Requiere |
+|--------|---------|----------|
+| `com.banking.core` | `account`, `exception` | — |
+| `com.banking.operations` | `factory` | `core` |
+| `com.banking.ui` | `console` | `core`, `operations` |
+| `com.banking.app` | *(nada)* | `core`, `operations`, `ui` |
 
-### module-info.java
+## `module-info.java` de cada módulo
 
-Cada módulo contiene un archivo `module-info.java` que define:
+**core**
+```java
+module com.banking.core {
+    exports com.banking.core.account;
+    exports com.banking.core.exception;
+}
+```
+
+**operations**
+```java
+module com.banking.operations {
+    requires com.banking.core;
+    exports com.banking.operations.factory;
+}
+```
+
+**ui**
+```java
+module com.banking.ui {
+    requires com.banking.core;
+    requires com.banking.operations;
+    exports com.banking.ui.console;
+}
+```
+
+**app**
+```java
+module com.banking.app {
+    requires com.banking.core;
+    requires com.banking.operations;
+    requires com.banking.ui;
+}
+```
+
+## Qué ejecutar en IntelliJ
+
+| Clase | Módulo | Para qué |
+|-------|--------|----------|
+| `ModuleInspector` | `com.banking.app` | Ver grafo `com.banking.*` en runtime |
+| `BankingApplication` | `com.banking.app` | Demo interactiva |
+| `BankingConsoleUI` | `com.banking.ui` | Solo la UI |
+
+## Encapsulación en acción
 
 ```java
-module com.example.mymodule {
-    // Declarar dependencias de otros módulos
-    requires com.example.other;
-    requires transitive java.base;
-    
-    // Exportar paquetes públicos
-    exports com.example.public.api;
-    exports com.example.other to com.example.specific;
-    
-    // Para Service Providers
-    uses com.example.spi.MyService;
-    provides com.example.spi.MyService with com.example.impl.MyServiceImpl;
-}
-```
-
-### Ejemplo: BankAccount
-
-```java
-// Interfaz pública (exportada por core)
-public interface BankAccount {
-    String getAccountNumber();
-    BigDecimal getBalance();
-    void deposit(BigDecimal amount);
-    void withdraw(BigDecimal amount);
-}
-
-// Implementación privada (NO exportada por operations)
-class SavingsAccount implements BankAccount {
-    // Detalles de implementación encapsulados
-}
-
-// Factory pública (exportada por operations)
-public class AccountFactory {
-    public static BankAccount createSavingsAccount(...) {
-        return new SavingsAccount(...);
-    }
-}
-```
-
-**Lección**: Los clientes usan la interfaz y la factory, nunca acceden a la implementación.
-
-## 🎓 Conceptos Clave
-
-### Encapsulación Fuerte
-
-```java
-// ✅ PERMITIDO
+// ✅ Permitido desde com.banking.app
 import com.banking.core.account.BankAccount;
 import com.banking.operations.factory.AccountFactory;
+import com.banking.ui.console.BankingConsoleUI;
 
-// ❌ NO PERMITIDO
+// ❌ No compila — paquete no exportado
 import com.banking.operations.account.SavingsAccount;
-// Error: package not visible (no está exportado)
 ```
 
-### Dependencias Explícitas
+Usa la **factory** para crear cuentas; la implementación `SavingsAccount` queda oculta dentro de `operations`.
 
-- `com.banking.app` requiere: core, operations, ui
-- `com.banking.ui` requiere: core, operations
-- `com.banking.operations` requiere: core
-- `com.banking.core` requiere: (nada)
+## Ejercicios sugeridos
 
-Sin ciclos. Jerarquía clara.
+1. Lee los 4 `module-info.java` y traza el grafo de dependencias.
+2. En `BankingApplication`, intenta importar `SavingsAccount` y lee el error del compilador.
+3. Ejecuta `ModuleInspector` y compara con lo que leíste en los `module-info`.
+4. *(Avanzado)* Crea `com.banking.reports` que requiera `core` y exponga un paquete de reportes.
 
-### Validación Automática
+## Errores frecuentes
 
-El compilador detecta:
-- Paquetes no exportados no accesibles
-- Módulos requeridos no disponibles
-- Dependencias circulares
-- Símbolos no encontrados
+| Error | Causa | Solución |
+|-------|-------|----------|
+| `package X is not visible` | Importas un paquete no exportado | Usa la API pública (factory/interfaz) o añade `exports` |
+| `module X is not accessible` | Falta `requires` en `module-info.java` | Añade `requires com.banking.X` |
+| `Circular dependency` | A requiere B y B requiere A | Rediseña capas (core → operations → ui → app) |
+| `Cannot find artifact` | Módulos no instalados en `.m2` | `mvn clean install -DskipTests` desde la raíz |
+| `module-info.java not found` | Archivo mal ubicado | Debe estar en `src/main/java/module-info.java` |
 
-## 📝 Ejercicios para Estudiantes
+**Checks antes de compilar:** sin ciclos en `requires`, cada `exports` apunta a un paquete real, `module-info.java` en `src/main/java/`.
 
-### Nivel 1: Entender la Estructura
-1. Leer cada `module-info.java`
-2. Entender las exportaciones
-3. Tracer las dependencias
-
-### Nivel 2: Experimentar
-1. Intentar importar `SavingsAccount` (fallará)
-2. Cambiar exports en module-info
-3. Observar cómo cambian los errores
-
-### Nivel 3: Extender
-1. Crear nuevo módulo `com.banking.reports`
-2. Implementar generador de reportes
-3. Integrar en la aplicación
-
-### Nivel 4: Avanzado
-1. Implementar Service Providers
-2. Crear validadores modulares
-3. Agregar persistencia modular
-
-## 🔍 Inspección de Módulos
-
-Usar `ModuleInspector` para ver:
-- Todos los módulos del sistema
-- Paquetes exportados
-- Dependencias
-- Servicios (providers/consumers)
-
-```java
-Module module = BankAccount.class.getModule();
-ModuleDescriptor descriptor = module.getDescriptor();
-
-descriptor.exports()   // Paquetes públicos
-descriptor.requires()  // Dependencias
-descriptor.provides()  // Servicios
-descriptor.uses()      // Servicios usados
+```bash
+java --describe-module com.banking.core   # tras empaquetar
+mvn compile -X | grep module              # debug Maven
 ```
 
-## ⚠️ Errores Comunes
+## Multi-Release JAR (opcional)
 
-Ver **ERRORES_COMUNES.md** para soluciones a:
-- "package X is not visible"
-- "module X is not accessible"
-- "Circular dependencies detected"
-- "Cannot access class X" (reflection)
-- Y 6 errores más con ejemplos
+Tema avanzado en `com.banking.multirelease/`. Ver su `README.md` o:
 
-## 📊 Comparación: Antes vs Ahora
+```bash
+./run-demo.sh multi
+```
 
-| Aspecto | Java 8 | Java 21+ Módulos |
-|---------|--------|------------------|
-| Encapsulación | Por convención | Forzada por sistema |
-| Dependencias | Implícitas | Explícitas |
-| Validación | En runtime | En compilación |
-| Arquitectura | Difícil de ver | Clara y explícita |
-| Ciclos | Permitidos (problema) | Detectados (error) |
+## Recursos
 
-## 🌐 Recursos Externos
-
-- [Project Jigsaw Official](https://openjdk.org/projects/jigsaw/)
-- [Module System Tutorial](https://docs.oracle.com/javase/tutorial/java/javaOO/modules.html)
-- [State of the Module System](https://cr.openjdk.org/~mr/jigsaw/state-of-modules/)
-- [Java 9 Modules by Example](https://www.baeldung.com/java-9-modularity)
-
-## 📞 Soporte
-
-Para preguntas sobre este proyecto:
-1. Revisar **GUIA_ENSENANZA.md** para conceptos
-2. Revisar **ERRORES_COMUNES.md** para debugging
-3. Ver **EJEMPLOS_PRACTICOS.md** para código detallado
-4. Ejecutar `./run-demo.sh` con diferentes opciones
-
----
-
-**Nota**: Este proyecto está diseñado para propósitos educativos. Es un ejemplo simplificado pero completo de arquitectura modular en Java 21.
-
-**Versión**: 1.0  
-**Basado en**: Java 21, Maven 3.8+  
-**Última actualización**: 2026-03-24
-
+- [Tutorial módulos (Oracle)](https://docs.oracle.com/javase/tutorial/java/javaOO/modules.html)
+- [Project Jigsaw](https://openjdk.org/projects/jigsaw/)

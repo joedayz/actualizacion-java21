@@ -23,10 +23,9 @@ IntelliJ importará 3 submódulos:
 | `modulo-5-demos` | `ModulosEnRuntime`, `ReflectionIlegal`, `TlsDefaults`, `ApisCambiadas` | Run en la clase `main` |
 | `modulo-5-laboratorio` | `LegacyPlatformService`, `SolucionMigrada` | Run en la clase `main` |
 
-**Demo JPMS banking** (módulos `com.banking.*`): abre por separado
-`modulo-5-modularidad-seguridad/modulos-ejemplo/pom.xml` en IntelliJ.
-El módulo `com.banking.app` está en `modulos-ejemplo/com.banking.app/` — no exporta
-nada y requiere core, operations y ui. Ejecuta `ModuleInspector` para verlo en runtime.
+**Demo JPMS banking** (`com.banking.*`): abre por separado
+`modulo-5-modularidad-seguridad/modulos-ejemplo/pom.xml`. Toda la guía está en
+`modulos-ejemplo/README.md` (un solo archivo).
 
 Tras abrir el `pom.xml`, espera a que Maven termine de importar y verifica que el SDK del proyecto sea **21+** (`File → Project Structure → Project SDK`).
 
