@@ -8,8 +8,9 @@ Basado en la propuesta comercial `Propuesta Comercial - Java 21.pdf` (JOEDAYZ ac
 - **Módulo 3 (preparado):** [`modulo-3-concurrencia-moderna/teoria.md`](./modulo-3-concurrencia-moderna/teoria.md) · ejercicios en [`modulo-3-concurrencia-moderna/ejercicios/`](./modulo-3-concurrencia-moderna/ejercicios/)
 - **Módulo 4 (preparado):** [`modulo-4-jvm-observabilidad/teoria.md`](./modulo-4-jvm-observabilidad/teoria.md) · ejercicios en [`modulo-4-jvm-observabilidad/ejercicios/`](./modulo-4-jvm-observabilidad/ejercicios/)
 - **Módulo 5 (preparado):** [`modulo-5-modularidad-seguridad/teoria.md`](./modulo-5-modularidad-seguridad/teoria.md) · ejercicios en [`modulo-5-modularidad-seguridad/ejercicios/`](./modulo-5-modularidad-seguridad/ejercicios/)
+- **Módulo 6 (preparado):** [`modulo-6-ecosistema-frameworks/teoria.md`](./modulo-6-ecosistema-frameworks/teoria.md) · ejercicios en [`modulo-6-ecosistema-frameworks/ejercicios/`](./modulo-6-ecosistema-frameworks/ejercicios/)
 
-Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluciones-modulo-3/`, `soluciones-modulo-4/`, `soluciones-modulo-5/`.
+Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluciones-modulo-3/`, `soluciones-modulo-4/`, `soluciones-modulo-5/`, `soluciones-modulo-6/`.
 
 ## Módulo 1. Roadmap de Java 8 a Java 21 (3h)
 - [`modulo-1-roadmap-java8-a-java21/teoria.md`](./modulo-1-roadmap-java8-a-java21/teoria.md)
@@ -54,6 +55,19 @@ Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluc
 - Laboratorio clásico: [`laboratorio/`](./modulo-5-modularidad-seguridad/laboratorio/)
 - **Ejercicios con tests:** [`ejercicios/`](./modulo-5-modularidad-seguridad/ejercicios/)
 
+## Módulo 6. Ecosistema y Frameworks Modernos (4h)
+- [`modulo-6-ecosistema-frameworks/teoria.md`](./modulo-6-ecosistema-frameworks/teoria.md)
+- Demos:
+  - `demos/01-maven-moderno/` (guía Maven)
+  - `demos/02-gradle-moderno/` (guía Gradle)
+  - `demos/03-jakarta-migracion/`
+  - `demos/04-spring-boot-3/`
+  - `demos/05-hibernate-6/`
+  - `demos/06-jdbc-compatibilidad/`
+  - `demos/07-dependencias/` (actualización de dependencias)
+- Laboratorio clásico: [`laboratorio/`](./modulo-6-ecosistema-frameworks/laboratorio/)
+- **Ejercicios con tests:** [`ejercicios/`](./modulo-6-ecosistema-frameworks/ejercicios/)
+
 ## Cómo correr demos
 
 ```bash
@@ -73,4 +87,5 @@ cd modulo-2-evolucion-lenguaje/ejercicios && mvn test
 cd modulo-3-concurrencia-moderna/ejercicios && mvn test
 cd modulo-4-jvm-observabilidad/ejercicios && mvn test
 cd modulo-5-modularidad-seguridad/ejercicios && mvn test
+cd modulo-6-ecosistema-frameworks/ejercicios && mvn test
 ```
