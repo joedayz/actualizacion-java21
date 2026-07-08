@@ -14,6 +14,21 @@ echo ""
 
 cd "$(dirname "$0")"
 
+build_banking_modules() {
+    mvn -q package -DskipTests \
+        -pl com.banking.core,com.banking.operations,com.banking.ui,com.banking.app -am
+}
+
+banking_module_path() {
+    echo "com.banking.app/target/com.banking.app-1.0-SNAPSHOT.jar:com.banking.ui/target/com.banking.ui-1.0-SNAPSHOT.jar:com.banking.operations/target/com.banking.operations-1.0-SNAPSHOT.jar:com.banking.core/target/com.banking.core-1.0-SNAPSHOT.jar"
+}
+
+run_banking_module() {
+    local main_module="$1"
+    build_banking_modules
+    java --module-path "$(banking_module_path)" --module "$main_module"
+}
+
 # Mostrar opciones
 if [ $# -eq 0 ]; then
     echo "Uso: ./run-demo.sh [opción]"
@@ -41,15 +56,13 @@ case "$1" in
     app)
         echo "🏦 Iniciando aplicación bancaria..."
         echo ""
-        mvn -pl com.banking.app clean compile exec:java \
-            -Dexec.mainClass="com.banking.app.BankingApplication"
+        run_banking_module com.banking.app/com.banking.app.BankingApplication
         ;;
 
     inspect)
         echo "🔍 Inspeccionando módulos del sistema..."
         echo ""
-        mvn -pl com.banking.app clean compile exec:java \
-            -Dexec.mainClass="com.banking.app.ModuleInspector"
+        run_banking_module com.banking.app/com.banking.app.ModuleInspector
         ;;
 
     jar)

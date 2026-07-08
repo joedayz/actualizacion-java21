@@ -63,7 +63,7 @@ Nivel 1 (Núcleo):
 ### Compilar
 
 ```bash
-cd modulo08
+cd modulo-5-modularidad-seguridad/modulos-ejemplo
 mvn clean compile
 ```
 
