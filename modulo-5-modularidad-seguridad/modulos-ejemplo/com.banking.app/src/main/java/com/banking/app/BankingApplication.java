@@ -2,6 +2,7 @@ package com.banking.app;
 
 import com.banking.core.account.BankAccount;
 import com.banking.operations.factory.AccountFactory;
+import com.banking.reports.api.AccountReportGenerator;
 import com.banking.ui.console.BankingConsoleUI;
 
 import java.math.BigDecimal;
@@ -36,7 +37,7 @@ public final class BankingApplication {
         );
 
         // Usar la UI del módulo ui
-        BankingConsoleUI ui = new BankingConsoleUI(account);
+        BankingConsoleUI ui = new BankingConsoleUI(account, () -> AccountReportGenerator.generarReporte(account));
         ui.start();
     }
 

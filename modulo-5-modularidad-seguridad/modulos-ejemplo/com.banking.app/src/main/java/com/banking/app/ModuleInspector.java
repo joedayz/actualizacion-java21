@@ -12,8 +12,6 @@ import java.util.TreeSet;
  */
 public final class ModuleInspector {
 
-
-
     public static void main(String[] args) {
         System.out.println("\n" + "=".repeat(70));
         System.out.println("              INSPECTOR DE MÓDULOS JAVA 21");
@@ -24,8 +22,9 @@ public final class ModuleInspector {
         System.out.println("─".repeat(70));
 
         ModuleLayer.boot().modules().stream()
-                .sorted((m1, m2) -> m1.getName().compareTo(m2.getName()))
-                .forEach(module -> inspectModule(module));
+                .filter(m -> m.isNamed() && m.getName().startsWith("com.banking."))
+                .sorted(Comparator.comparing(Module::getName))
+                .forEach(ModuleInspector::inspectModule);
 
         System.out.println("\n" + "─".repeat(70) + "\n");
     }

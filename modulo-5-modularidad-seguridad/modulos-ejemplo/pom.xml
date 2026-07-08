@@ -16,6 +16,7 @@
         <module>com.banking.core</module>
         <module>com.banking.operations</module>
         <module>com.banking.ui</module>
+        <module>com.banking.reports</module>
         <module>com.banking.app</module>
         <module>com.banking.multirelease</module>
     </modules>

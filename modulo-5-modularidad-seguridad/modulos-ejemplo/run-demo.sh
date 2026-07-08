@@ -16,11 +16,11 @@ cd "$(dirname "$0")"
 
 build_banking_modules() {
     mvn -q package -DskipTests \
-        -pl com.banking.core,com.banking.operations,com.banking.ui,com.banking.app -am
+        -pl com.banking.core,com.banking.operations,com.banking.ui,com.banking.reports,com.banking.app -am
 }
 
 banking_module_path() {
-    echo "com.banking.app/target/com.banking.app-1.0-SNAPSHOT.jar:com.banking.ui/target/com.banking.ui-1.0-SNAPSHOT.jar:com.banking.operations/target/com.banking.operations-1.0-SNAPSHOT.jar:com.banking.core/target/com.banking.core-1.0-SNAPSHOT.jar"
+    echo "com.banking.app/target/com.banking.app-1.0-SNAPSHOT.jar:com.banking.ui/target/com.banking.ui-1.0-SNAPSHOT.jar:com.banking.operations/target/com.banking.operations-1.0-SNAPSHOT.jar:com.banking.reports/target/com.banking.reports-1.0-SNAPSHOT.jar:com.banking.core/target/com.banking.core-1.0-SNAPSHOT.jar"
 }
 
 run_banking_module() {
