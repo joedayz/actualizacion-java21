@@ -9,8 +9,9 @@ Basado en la propuesta comercial `Propuesta Comercial - Java 21.pdf` (JOEDAYZ ac
 - **Módulo 4 (preparado):** [`modulo-4-jvm-observabilidad/teoria.md`](./modulo-4-jvm-observabilidad/teoria.md) · ejercicios en [`modulo-4-jvm-observabilidad/ejercicios/`](./modulo-4-jvm-observabilidad/ejercicios/)
 - **Módulo 5 (preparado):** [`modulo-5-modularidad-seguridad/teoria.md`](./modulo-5-modularidad-seguridad/teoria.md) · ejercicios en [`modulo-5-modularidad-seguridad/ejercicios/`](./modulo-5-modularidad-seguridad/ejercicios/)
 - **Módulo 6 (preparado):** [`modulo-6-ecosistema-frameworks/teoria.md`](./modulo-6-ecosistema-frameworks/teoria.md) · ejercicios en [`modulo-6-ecosistema-frameworks/ejercicios/`](./modulo-6-ecosistema-frameworks/ejercicios/)
+- **Módulo 7 (preparado):** [`modulo-7-herramientas-modernizacion/teoria.md`](./modulo-7-herramientas-modernizacion/teoria.md) · ejercicios en [`modulo-7-herramientas-modernizacion/ejercicios/`](./modulo-7-herramientas-modernizacion/ejercicios/)
 
-Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluciones-modulo-3/`, `soluciones-modulo-4/`, `soluciones-modulo-5/`, `soluciones-modulo-6/`.
+Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluciones-modulo-3/`, `soluciones-modulo-4/`, `soluciones-modulo-5/`, `soluciones-modulo-6/`, `soluciones-modulo-7/`.
 
 ## Módulo 1. Roadmap de Java 8 a Java 21 (3h)
 - [`modulo-1-roadmap-java8-a-java21/teoria.md`](./modulo-1-roadmap-java8-a-java21/teoria.md)
@@ -68,6 +69,20 @@ Soluciones del facilitador (locales, gitignored): `soluciones-modulo-2/`, `soluc
 - Laboratorio clásico: [`laboratorio/`](./modulo-6-ecosistema-frameworks/laboratorio/)
 - **Ejercicios con tests:** [`ejercicios/`](./modulo-6-ecosistema-frameworks/ejercicios/)
 
+## Módulo 7. Herramientas de Modernización y Migración (4h)
+- [`modulo-7-herramientas-modernizacion/teoria.md`](./modulo-7-herramientas-modernizacion/teoria.md)
+- Demos:
+  - `demos/01-jdeps/` (`UsaUnsafeLegacy` + guía `jdeps`)
+  - `demos/02-jdeprscan/` (`UsaApiDeprecada` + guía `jdeprscan`)
+  - `demos/03-openrewrite/` (guía OpenRewrite)
+  - `demos/04-moderne/` (guía Moderne)
+  - `demos/05-sonarqube/` (guía SonarQube)
+  - `demos/06-revapi/` (guía Revapi)
+  - `demos/07-intellij-analisis/` (Inspect Code / IDE)
+- Lab hands-on: [`app-legacy/`](./modulo-7-herramientas-modernizacion/app-legacy/) (`analyze.sh` / `analyze.ps1`)
+- Laboratorio clásico: [`laboratorio/`](./modulo-7-herramientas-modernizacion/laboratorio/)
+- **Ejercicios con tests:** [`ejercicios/`](./modulo-7-herramientas-modernizacion/ejercicios/)
+
 ## Cómo correr demos
 
 ```bash
@@ -88,14 +103,16 @@ cd modulo-3-concurrencia-moderna/ejercicios && mvn test
 cd modulo-4-jvm-observabilidad/ejercicios && mvn test
 cd modulo-5-modularidad-seguridad && mvn test
 cd modulo-6-ecosistema-frameworks && mvn test
+cd modulo-7-herramientas-modernizacion && mvn test
 ```
 
-## IntelliJ IDEA (módulos 4, 5 y 6)
+## IntelliJ IDEA (módulos 4–7)
 
 Abre el `pom.xml` raíz del módulo (no el repo completo):
 
 - Módulo 4: `modulo-4-jvm-observabilidad/pom.xml`
 - Módulo 5: `modulo-5-modularidad-seguridad/pom.xml`
 - Módulo 6: `modulo-6-ecosistema-frameworks/pom.xml`
+- Módulo 7: `modulo-7-herramientas-modernizacion/pom.xml`
 
 IntelliJ importará ejercicios, demos y laboratorio como submódulos Maven.

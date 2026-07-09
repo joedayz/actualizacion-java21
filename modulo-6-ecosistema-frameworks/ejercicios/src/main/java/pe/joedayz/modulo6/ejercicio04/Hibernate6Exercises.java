@@ -1,5 +1,8 @@
 package pe.joedayz.modulo6.ejercicio04;
 
+import java.util.Map;
+import java.util.Set;
+
 /**
  * Ejercicio 04 — Migración a Hibernate 6.
  */
@@ -7,29 +10,25 @@ public final class Hibernate6Exercises {
 
     private Hibernate6Exercises() {}
 
-    /**
-     * Migra un dialecto de Hibernate 5 al equivalente en Hibernate 6.
-     *
-     * <p>Si el dialecto ya es de Hibernate 6 o no se reconoce, devolver sin cambios.
-     */
+    private static final Map<String, String> DIALECTOS = Map.of(
+            "org.hibernate.dialect.MySQL5Dialect", "org.hibernate.dialect.MySQLDialect",
+            "org.hibernate.dialect.MySQL8Dialect", "org.hibernate.dialect.MySQLDialect",
+            "org.hibernate.dialect.PostgreSQL95Dialect", "org.hibernate.dialect.PostgreSQLDialect",
+            "org.hibernate.dialect.Oracle12cDialect", "org.hibernate.dialect.OracleDialect");
+
+    private static final Set<String> DEPRECADAS = Set.of(
+            "hibernate.id.new_generator_mappings",
+            "hibernate.jdbc.lob.non_contextual_creation");
+
     public static String migrarDialecto(String dialectoH5) {
-        // TODO
-        throw new UnsupportedOperationException("TODO: migrarDialecto");
+        return DIALECTOS.getOrDefault(dialectoH5, dialectoH5);
     }
 
-    /**
-     * {@code true} si la propiedad de configuración está deprecada/eliminada en Hibernate 6.
-     */
     public static boolean esPropiedadDeprecada(String propiedad) {
-        // TODO
-        throw new UnsupportedOperationException("TODO: esPropiedadDeprecada");
+        return DEPRECADAS.contains(propiedad);
     }
 
-    /**
-     * Namespace JPA correcto en Hibernate 6 / Spring Boot 3.
-     */
     public static String namespaceJpa() {
-        // TODO
-        throw new UnsupportedOperationException("TODO: namespaceJpa");
+        return "jakarta.persistence";
     }
 }
